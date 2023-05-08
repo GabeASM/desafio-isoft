@@ -19,7 +19,7 @@
             </div>
             
             <div class="fila">
-                <label for="numAutos" class="form-label">Cantidad de autos: </label>
+                <label for="numAutos" class="input-group-text">Cantidad </label>
                 <input type="number" class="form-control" id="numAutos" aria-describedby="emailHelp">
             </div>
 
@@ -78,18 +78,14 @@
         flex-direction: column;
         margin-bottom: 30px;
     }
-    #numAutos {
-        width: 60%;
-        margin-left: 25px;
-    }
     .fila {
         display: flex;
         flex-direction: row;
     }
     .input-group-text {
-        width: 20%;
+        width: 21%;
     }
-    #autos, #filtros {
-        width: 80%;
+    #autos, #filtros, #numAutos {
+        width: 79%;
     }
 </style>
