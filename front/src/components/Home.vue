@@ -9,29 +9,87 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Desafio Isoft</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     </head>
     <body>
 
-        <div>
-            <h2>Generar Autos</h2>
-            <span for="numAutos">Cantidad de autos a generar: </span>
-            <input id="numAutos" type="number">
+        <div class="contenedor">
+            <div class="mb-2">
+                <h2>Generar Autos</h2>
+            </div>
+            
+            <div class="fila">
+                <label for="numAutos" class="form-label">Cantidad de autos: </label>
+                <input type="number" class="form-control" id="numAutos" aria-describedby="emailHelp">
+            </div>
+
+            <div>
+                <button type="button" class="btn btn-success mt-3">Generar</button>
+            </div>
         </div>
 
-        <div>
-            <h2>Buscar por:</h2>
-            <span>[Filtros]</span>
+        <div class="contenedor input-group mb-3">
+            <div class="mb-2">
+                <h2>Buscar por:</h2>
+            </div>
+
+            <div class="mb-3 fila">
+                <label class="input-group-text" for="filtros">Filtros</label>
+                <select class="form-select" id="filtros">
+                    <option selected>Seleccionar...</option>
+                    <option value="1">Filtro1</option>
+                    <option value="2">Filtro2</option>
+                    <option value="3">Filtro3</option>
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <button type="button" class="btn btn-success">Buscar</button>
+            </div>
+            
         </div>
 
-        <div>
-            <h2>Ver características de un auto</h2>
-            <span>Seleccionar Auto: </span>
-            <span>[Autos]</span>
+        <div class="contenedor">
+            <div class="mb-2">
+                <h2>Ver características de un auto</h2>
+            </div>
+            
+            <div class="mb-3 fila">
+                <label class="input-group-text" for="autos">Auto</label>
+                <select class="form-select" id="autos">
+                    <option selected>Seleccionar...</option>
+                    <option value="1">Auto1</option>
+                    <option value="2">Auto2</option>
+                    <option value="3">Auto3</option>
+                </select>
+            </div>
+            
+            <div>
+                <button type="button" class="btn btn-success">Ver</button>
+            </div>
         </div>
     </body>
     </html>
 </template>
 
 <style>
-
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+    #numAutos {
+        width: 60%;
+        margin-left: 25px;
+    }
+    .fila {
+        display: flex;
+        flex-direction: row;
+    }
+    .input-group-text {
+        width: 20%;
+    }
+    #autos, #filtros {
+        width: 80%;
+    }
 </style>
