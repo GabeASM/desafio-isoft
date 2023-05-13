@@ -16,6 +16,7 @@ public class AutoController {
 
     @GetMapping("/{cantidad}")
     public ResponseEntity<?> listarAutos(@PathVariable int cantidad){
+        if(cantidad > 300 ) return ResponseEntity.badRequest().body("Cantidad de autos no puede ser mayor a 300");
         if(autoService.retornarCantidadLista() > 300) return ResponseEntity.ok(autoService.retornarLista());
         return ResponseEntity.ok(autoService.listarAutos(cantidad));
     }

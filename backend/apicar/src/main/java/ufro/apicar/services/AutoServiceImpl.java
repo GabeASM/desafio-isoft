@@ -49,7 +49,7 @@ public final class AutoServiceImpl implements IAutoService{
             if(tipo == "CAMIONETA") cabinas = cantidadCabina();
             int numeroPopularidad = popularidad();
             boolean sunRoof = seleccionarSunRoof();
-            int id = i;
+            int id = i + 1;
             int precio = generarPrecio();
             Auto auto = new Auto
                     (id ,
