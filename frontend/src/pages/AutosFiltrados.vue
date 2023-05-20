@@ -1,12 +1,12 @@
 <template>
     <div>
-        <h1>Detalle</h1>
+        <h1>Autos Filtrados</h1>
     </div>
 </template>
 
 <script>
 export default {
-    name: "DetallePage",
+    name: "AutosFiltradosPage",
 };
 </script>
 
