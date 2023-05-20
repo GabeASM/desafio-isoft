@@ -21,6 +21,7 @@ jobs:
       working-directory: backend/apicar
       run: mvn clean
     - name: Build
+      working-directory: backend/apicar
       run: mvn -B package
 
   test:
@@ -41,4 +42,5 @@ jobs:
       working-directory: backend/apicar
       run: mvn -B package
     - name: Test
+      working-directory: backend/apicar
       run: mvn test
