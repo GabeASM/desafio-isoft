@@ -18,6 +18,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Clean
+      working-directory: backend/apicar
       run: mvn clean
     - name: Build
       run: mvn -B package
@@ -34,8 +35,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Clean
+      working-directory: backend/apicar
       run: mvn clean
     - name: Build
+      working-directory: backend/apicar
       run: mvn -B package
     - name: Test
       run: mvn test
