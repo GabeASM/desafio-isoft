@@ -1,13 +1,11 @@
 {
-  "name": "front",
+  "name": "frontend",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.8.3",
