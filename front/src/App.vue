@@ -1,11 +1,11 @@
 <script setup>
-import Home from './components/Home.vue'
+import Home from './pages/Home.vue'
 </script>
 
 <template>
   <Home/>
 </template>
 
-<style scoped>
+<style>
 
 </style>
