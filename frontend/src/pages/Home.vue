@@ -15,11 +15,12 @@
             
             <div class="fila">
                 <label for="numAutos" class="input-group-text">Cantidad </label>
-                <input type="number" class="form-control" id="numAutos" aria-describedby="emailHelp">
+                <input type="number" v-model="numAutos" class="form-control" id="numAutos" aria-describedby="emailHelp"/>
             </div>
 
             <div>
-                <button type="button" class="btn btn-success mt-3">Generar</button>
+                <button @click="mostrarAutosGenerados()" 
+                type="submit" class="btn btn-success mt-3">Generar</button>
             </div>
         </div>
 
@@ -70,6 +71,24 @@
 <script>
 export default {
     name: "HomePage",
+    data() {
+        return {
+            numAutos: ""
+        }
+    },
+    methods: {
+        mostrarAutosGenerados() {
+
+            const numAuto = this.$refs.numAutos;
+            console.log(numAuto)
+            this.$router.push({
+                name: "autos_generados",
+                params: {
+                    numero: this.numAutos,
+                },
+            });
+        },
+    },
 };
 </script>
 
