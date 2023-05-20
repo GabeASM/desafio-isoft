@@ -9,7 +9,7 @@ public class Auto {
 
     private int ID;
     private String marca;
-    private int anio ;
+    private int anio;
     private String color;
     private boolean turbo;
     private String tipoAuto;
@@ -19,7 +19,8 @@ public class Auto {
     private boolean sunRoof;
     private int precio;
 
-    public Auto(int ID, String marca, int anio, String color, boolean turbo, String tipoAuto, String motor, int popularidad, String cantidadCabina, boolean sunRoof , int precio) {
+    public Auto(int ID, String marca, int anio, String color, boolean turbo, String tipoAuto, String motor,
+            int popularidad, String cantidadCabina, boolean sunRoof, int precio) {
         this.ID = ID;
         this.precio = precio;
         this.marca = marca;

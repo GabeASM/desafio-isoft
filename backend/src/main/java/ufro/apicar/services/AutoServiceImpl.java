@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public final class AutoServiceImpl implements IAutoService{
+public final class AutoServiceImpl implements IAutoService {
 
     private List<Auto> listaAutos = new ArrayList<>();
     private Random random;
 
     @Override
     public String generarMarca() {
-        List<String> marcas = List.of("TOYOTA" , "SUBARU" , "CHEVY" , "FORD" , "NISSAN");
+        List<String> marcas = List.of("TOYOTA", "SUBARU", "CHEVY", "FORD", "NISSAN");
         random = new Random();
         return marcas.get(random.nextInt(5));
     }
 
     @Override
-    public int retornarCantidadLista(){
+    public int retornarCantidadLista() {
         return listaAutos.size();
     }
 
@@ -46,22 +46,22 @@ public final class AutoServiceImpl implements IAutoService{
             String tipo = seleccionarTipo();
             String motor = seleccionarMotor(tipo);
             String cabinas = "NO APLICA";
-            if(tipo == "CAMIONETA") cabinas = cantidadCabina();
+            if (tipo == "CAMIONETA")
+                cabinas = cantidadCabina();
             int numeroPopularidad = popularidad();
             boolean sunRoof = seleccionarSunRoof();
-            int id = i;
+            int id = i + 1;
             int precio = generarPrecio();
-            Auto auto = new Auto
-                    (id ,
-                    marca ,
-                    año ,
-                    color ,
-                    turbo ,
-                    tipo ,
-                    motor ,
-                    numeroPopularidad ,
-                    cabinas ,
-                    sunRoof,precio);
+            Auto auto = new Auto(id,
+                    marca,
+                    año,
+                    color,
+                    turbo,
+                    tipo,
+                    motor,
+                    numeroPopularidad,
+                    cabinas,
+                    sunRoof, precio);
             listaAutos.add(auto);
         }
     }
@@ -85,7 +85,7 @@ public final class AutoServiceImpl implements IAutoService{
     @Override
     public String generarColor() {
         random = new Random();
-        List<String> colores = List.of("ROJO" , "VERDE" , "PLOMO" , "BLANCO" , "AZUL");
+        List<String> colores = List.of("ROJO", "VERDE", "PLOMO", "BLANCO", "AZUL");
         int numeroRandom = random.nextInt(5);
         return colores.get(numeroRandom);
     }
@@ -108,16 +108,19 @@ public final class AutoServiceImpl implements IAutoService{
 
     @Override
     public String seleccionarTipo() {
-        List<String> tipoAuto = List.of("SEDAN" , "CAMIONETA" , "SUV");
+        List<String> tipoAuto = List.of("SEDAN", "CAMIONETA", "SUV");
         random = new Random();
         return tipoAuto.get(random.nextInt(3));
     }
 
     @Override
     public String seleccionarMotor(String tipoAuto) {
-        if(tipoAuto == "SEDAN") return motorSedan();
-        else if(tipoAuto == "CAMIONETA") return motorSuv();
-        else if (tipoAuto == "SUV") return motorSuv();
+        if (tipoAuto == "SEDAN")
+            return motorSedan();
+        else if (tipoAuto == "CAMIONETA")
+            return motorSuv();
+        else if (tipoAuto == "SUV")
+            return motorSuv();
         return "MOTOR NO ESPECIFICADO";
     }
 
@@ -142,22 +145,27 @@ public final class AutoServiceImpl implements IAutoService{
 
     @Override
     public String motorSedan() {
-        List<String> motor = List.of("1.4cc" , "1.6cc" , "2.0cc");
+        List<String> motor = List.of("1.4cc", "1.6cc", "2.0cc");
         random = new Random();
         return motor.get(random.nextInt(3));
     }
 
     @Override
     public String motorCamioneta() {
-        List<String> motor = List.of("2.4cc" , "3.0cc" , "4.0cc");
+        List<String> motor = List.of("2.4cc", "3.0cc", "4.0cc");
         random = new Random();
         return motor.get(random.nextInt(3));
     }
 
     @Override
     public String motorSuv() {
-        List<String> motor = List.of("1.8cc" , "2.2cc" , "2.8cc");
+        List<String> motor = List.of("1.8cc", "2.2cc", "2.8cc");
         random = new Random();
         return motor.get(random.nextInt(3));
+    }
+
+    @Override
+    public void vaciarLista() {
+        listaAutos.clear();
     }
 }
