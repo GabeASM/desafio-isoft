@@ -13,8 +13,9 @@ const routes = [
     },
     {
         name: 'detalle',
-        path: '/detalle',
+        path: '/detalle/:id',
         component: Detalle,
+        props: true,
     },
     {
         name: 'autos_generados',

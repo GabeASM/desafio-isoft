@@ -37,8 +37,25 @@
 </template>
 
 <script>
+
 export default {
     name: "DetallePage",
+
+    props: {
+        auto: {
+            type: Object,
+            default: null,
+        },
+        autos: {
+            type: Array,
+            default: [],
+        },
+    },
+    async mounted() {
+            const autoId = this.$route.params.id;
+            auto = this.autos[autoId]
+            console.log(auto)
+    }
 };
 </script>
 

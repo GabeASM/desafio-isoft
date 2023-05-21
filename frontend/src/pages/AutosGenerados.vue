@@ -23,7 +23,8 @@
             <td>{{ auto.tipoAuto }}</td>
             <td>${{ auto.precio }}</td>
             <td>
-              <button type="submit" class="btn btn-primary rounded-pill">Ver</button>
+              <button @click="verDetalle(auto)"
+               type="submit" class="btn btn-primary rounded-pill">Ver</button>
             </td>
           </tr>
         </tbody>
@@ -41,10 +42,29 @@ export default {
       autos: [],
     };
   },
+  props: {
+    objAuto: {
+      type: Object,
+      default: null,
+    },
+  },
   async mounted() {
     const num = this.$route.params.numero;
     const result = await listaAutos(num);
     this.autos = result;
+  },
+  methods: {
+    verDetalle(objAuto) {
+      this.$router.push({
+        name: "detalle",
+        params: {
+          id: objAuto.id,
+        },
+        props: {
+          autos: this.autos,
+        },
+      });
+    },
   },
 };
 </script>
