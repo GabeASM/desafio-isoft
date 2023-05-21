@@ -16,10 +16,12 @@ public class AutoController {
 
     @GetMapping(value = "/generarAutos/{cantidad}")
     public ResponseEntity<?> listarAutos(@PathVariable int cantidad) {
-        if (cantidad > 0 & cantidad < 300) {
-            autoService.vaciarLista();
-            return ResponseEntity.ok().body(autoService.listarAutos(cantidad));
 
+        if (cantidad > 0 & cantidad < 301) {
+            autoService.vaciarLista();
+            var lista = autoService.listarAutos(cantidad);
+
+            return ResponseEntity.ok().body(lista);
         }
         return ResponseEntity.badRequest().body("Cantidad de autos debe ser un numero valido o no mayor 300 ");
     }
@@ -28,6 +30,5 @@ public class AutoController {
     public ResponseEntity<?> verDetalleAuto(@PathVariable int id) {
         return ResponseEntity.ok().body(autoService.buscarPorId(id));
     }
-
 
 }

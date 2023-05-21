@@ -35,6 +35,7 @@
 
 <script>
 import { listaAutos } from '../services/generar_autos.services';
+
 export default {
   name: "AutosGeneradosPage",
   data() {
@@ -49,10 +50,21 @@ export default {
     },
   },
   async mounted() {
-    const num = this.$route.params.numero;
+  const num = this.$route.params.numero;
+
+  if (history.state && history.state.autosGenerados && history.state.autosGenerados.numero === num) {
+    // Los datos están almacenados en el historial del navegador, no es necesario volver a cargar el backend
+    this.autos = history.state.autosGenerados.data;
+  } else {
+    // Cargar el backend normalmente
     const result = await listaAutos(num);
     this.autos = result;
-  },
+
+    // Almacenar los datos en el historial del navegador
+    const state = { autosGenerados: { numero: num, data: result } };
+    history.replaceState(state, '');
+  }
+},
   methods: {
     verDetalle(objAuto) {
       this.$router.push({
@@ -66,6 +78,7 @@ export default {
       });
     },
   },
+  
 };
 </script>
 

@@ -15,17 +15,20 @@ const routes = [
         name: 'detalle',
         path: '/detalle/:id',
         component: Detalle,
+        meta:{cache : true},
         props: true,
     },
     {
         name: 'autos_generados',
         path: '/generarAutos/:numero',
         component: AutosGenerados,
+        meta: { keepAlive: true },
     },
     {
         name: 'autos_filtrados',
         path: '/filtro',
         component: AutosFiltrados,
+        
     }
 ];
 
