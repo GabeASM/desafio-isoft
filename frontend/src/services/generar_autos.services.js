@@ -10,4 +10,12 @@ function listaAutos(numero) {
     });
 }
 
-export { listaAutos };
+function verDetalle(id) {
+  return axios
+    .get(`${BASE_URL}/detalle/${id}`)
+    .then((result) => {
+      return result.data;
+    });
+}
+
+export { listaAutos, verDetalle };

@@ -23,4 +23,11 @@ public class AutoController {
         }
         return ResponseEntity.badRequest().body("Cantidad de autos debe ser un numero valido o no mayor 300 ");
     }
+
+    @GetMapping(value = "/detalle/{id}")
+    public ResponseEntity<?> verDetalleAuto(@PathVariable int id) {
+        return ResponseEntity.ok().body(autoService.buscarPorId(id));
+    }
+
+
 }

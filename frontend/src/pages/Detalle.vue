@@ -19,7 +19,7 @@
             </thead>
             <tbody>
               <tr>
-                <!-- <td>{{ auto.marca }}</td>
+                <td>{{ auto.marca }}</td>
                 <td>{{ auto.anio }}</td>
                 <td>{{ auto.color }}</td>
                 <td>{{ auto.turbo }}</td>
@@ -28,7 +28,7 @@
                 <td>{{ auto.popularidad }}</td>
                 <td>{{ auto.cantidadCabina }}</td>
                 <td>{{ auto.sunRoof }}</td>
-                <td>${{ auto.precio }}</td> -->
+                <td>${{ auto.precio }}</td>
               </tr>
             </tbody>
           </table>
@@ -37,24 +37,19 @@
 </template>
 
 <script>
+import { verDetalle } from '@/services/generar_autos.services';
 export default {
     name: "DetallePage",
-/*
-    props: {
-        auto: {
-            type: Object,
-            default: null,
-        },
-        autos: {
-            type: Array,
-            default: [],
-        },
-    },
-    async mounted() {
-            const autoId = this.$route.params.id;
-            auto = this.autos[autoId]
-            console.log(auto)
-    }*/
+  data() {
+    return {
+      auto: Object,
+    };
+  },
+  async mounted() {
+    const num = this.$route.params.id;
+    const result = await verDetalle(num);
+    this.auto = result;
+  },
 };
 </script>
 
