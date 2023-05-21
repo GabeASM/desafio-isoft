@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <tr v-for="(auto, index) in autos" :key="auto.id">
-            <th scope="row">{{ index }}</th>
+            <th scope="row">{{ index + 1 }}</th>
             <td>{{ auto.marca }}</td>
             <td>{{ auto.anio }}</td>
             <td>{{ auto.color }}</td>

@@ -37,10 +37,9 @@
 </template>
 
 <script>
-
 export default {
     name: "DetallePage",
-
+/*
     props: {
         auto: {
             type: Object,
@@ -55,7 +54,7 @@ export default {
             const autoId = this.$route.params.id;
             auto = this.autos[autoId]
             console.log(auto)
-    }
+    }*/
 };
 </script>
 

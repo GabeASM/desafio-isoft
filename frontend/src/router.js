@@ -19,7 +19,7 @@ const routes = [
     },
     {
         name: 'autos_generados',
-        path: '/:numero',
+        path: '/generarAutos/:numero',
         component: AutosGenerados,
     },
     {

@@ -1,11 +1,11 @@
 package ufro.apicar.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
 import ufro.apicar.services.IAutoService;
 
 @RestController
@@ -14,10 +14,13 @@ public class AutoController {
     @Autowired
     private IAutoService autoService;
 
-    @GetMapping("/{cantidad}")
-    public ResponseEntity<?> listarAutos(@PathVariable int cantidad){
-        if(autoService.retornarCantidadLista() > 300) return ResponseEntity.ok(autoService.retornarLista());
-        return ResponseEntity.ok(autoService.listarAutos(cantidad));
-    }
+    @GetMapping(value = "/generarAutos/{cantidad}")
+    public ResponseEntity<?> listarAutos(@PathVariable int cantidad) {
+        if (cantidad > 0 & cantidad < 300) {
+            autoService.vaciarLista();
+            return ResponseEntity.ok().body(autoService.listarAutos(cantidad));
 
+        }
+        return ResponseEntity.badRequest().body("Cantidad de autos debe ser un numero valido o no mayor 300 ");
+    }
 }
