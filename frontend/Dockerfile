@@ -1,11 +1,11 @@
-FROM node:18.12-alpine 
+FROM node:18.12-alpine
 
-WORKDIR /app 
+WORKDIR /app
 
-COPY . . 
+COPY . .
 
-EXPOSE 8080 
+EXPOSE 8080
 
-RUN npm install 
- 
-CMD ["npm"] 
+RUN npm install
+
+CMD ["npm","run","serve"] 
