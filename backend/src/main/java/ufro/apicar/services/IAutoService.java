@@ -44,4 +44,7 @@ public sealed interface IAutoService permits AutoServiceImpl {
     void vaciarLista();
 
     Auto buscarPorId(int id);
+
+    List<Auto> filtrarAuto(int filtroPrecio);
+
 }

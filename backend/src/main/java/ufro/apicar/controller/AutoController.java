@@ -26,6 +26,14 @@ public class AutoController {
         return ResponseEntity.badRequest().body("Cantidad de autos debe ser un numero valido o no mayor 300 ");
     }
 
+    @GetMapping(value = "/filtro/{precioFiltro}")
+    public ResponseEntity<?> filtrarPorPrecio(@PathVariable int precioFiltro) {
+        if (precioFiltro < 0)
+            return ResponseEntity.badRequest().body("El filtro debe ser valido");
+
+        return ResponseEntity.ok().body(autoService.filtrarAuto(precioFiltro));
+    }
+
     @GetMapping(value = "/detalle/{id}")
     public ResponseEntity<?> verDetalleAuto(@PathVariable int id) {
         return ResponseEntity.ok().body(autoService.buscarPorId(id));
