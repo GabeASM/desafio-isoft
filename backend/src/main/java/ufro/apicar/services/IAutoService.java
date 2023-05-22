@@ -42,4 +42,9 @@ public sealed interface IAutoService permits AutoServiceImpl {
     String motorSuv();
 
     void vaciarLista();
+
+    Auto buscarPorId(int id);
+
+    List<Auto> filtrarAuto(int filtroPrecio);
+
 }

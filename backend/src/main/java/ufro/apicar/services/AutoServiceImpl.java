@@ -168,4 +168,23 @@ public final class AutoServiceImpl implements IAutoService {
     public void vaciarLista() {
         listaAutos.clear();
     }
+
+    @Override
+    public Auto buscarPorId(int id) {
+        Auto autoObtenido = new Auto();
+        for (Auto auto : listaAutos) {
+            if (auto.getID() == id) {
+                autoObtenido = auto;
+                return autoObtenido;
+            }
+        }
+        return autoObtenido;
+    }
+
+    @Override
+    public List<Auto> filtrarAuto(int filtroPrecio) {
+        List<Auto> menoresAlPrecio = listaAutos.stream().filter(auto -> auto.getPrecio() <= filtroPrecio).toList();
+        return menoresAlPrecio;
+    }
+
 }

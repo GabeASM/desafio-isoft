@@ -1,17 +1,17 @@
-name: Java CI with Maven
+name: Pipeline Desafio
 
 on:
   push:
     branches: [ "rama_pipeline" ]
 
 jobs:
-  build:
+  build-backend:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Inciar JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -24,12 +24,12 @@ jobs:
       working-directory: backend/
       run: mvn -B package
 
-  test:
+  test-backend:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Inciar JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -44,3 +44,18 @@ jobs:
     - name: Test
       working-directory: backend/
       run: mvn test
+
+  build-vue:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Instalar dependencias
+      working-directory: frontend
+      run: npm install
+    - name: Ejecutar pruebas
+      working-directory: frontend
+      run: npm run test
+    - name: Generar versión de producción
+      working-directory: frontend
+      run: npm run build
