@@ -17,5 +17,13 @@ function verDetalle(id) {
       return result.data;
     });
 }
+function filtrarAutos(precio){
+  return axios
+  .get(`${BASE_URL}/filtro/${precio}`)
+  .then((result) => {
+    return result.data
+  })
+}
 
-export { listaAutos, verDetalle };
+
+export { listaAutos, verDetalle , filtrarAutos };

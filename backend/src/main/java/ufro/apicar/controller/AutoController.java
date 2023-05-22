@@ -30,8 +30,11 @@ public class AutoController {
     public ResponseEntity<?> filtrarPorPrecio(@PathVariable int precioFiltro) {
         if (precioFiltro < 0)
             return ResponseEntity.badRequest().body("El filtro debe ser valido");
-
-        return ResponseEntity.ok().body(autoService.filtrarAuto(precioFiltro));
+        var listaAutoFiltrada = autoService.filtrarAuto(precioFiltro);
+        if (listaAutoFiltrada.isEmpty()) {
+            return ResponseEntity.ok().body(autoService.retornarLista());
+        }
+        return ResponseEntity.ok().body(listaAutoFiltrada);
     }
 
     @GetMapping(value = "/detalle/{id}")
