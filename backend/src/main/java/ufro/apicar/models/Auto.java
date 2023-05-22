@@ -19,8 +19,11 @@ public class Auto {
     private boolean sunRoof;
     private int precio;
 
+    public Auto() {
+    }
+
     public Auto(int ID, String marca, int anio, String color, boolean turbo, String tipoAuto, String motor,
-            int popularidad, String cantidadCabina, boolean sunRoof, int precio) {
+                int popularidad, String cantidadCabina, boolean sunRoof, int precio) {
         this.ID = ID;
         this.precio = precio;
         this.marca = marca;
