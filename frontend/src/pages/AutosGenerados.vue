@@ -12,7 +12,6 @@
     </div>
 
     <div>
-      <h4 v-if="mensajeListaVacia === true">No hay autos con un precio menor a {{ precioFiltro }}</h4>
       <table  class="table table-striped">
       <thead>
           <tr>
@@ -26,8 +25,8 @@
           </tr>
         </thead>
         <tbody v-if="condicionFiltro === false">
-          <tr  v-for="(auto, index) in autos" :key="auto.id">
-            <th scope="row">{{ index + 1 }}</th>
+          <tr  v-for="(auto) in autos" :key="auto.id">
+            <th scope="row">{{ auto.id }}</th>
             <td>{{ auto.marca }}</td>
             <td>{{ auto.anio }}</td>
             <td>{{ auto.color }}</td>
@@ -39,8 +38,8 @@
           </tr>
         </tbody>
           <tbody v-else>
-          <tr  v-for="(auto, index) in autosFiltrados" :key="auto.id" >
-            <th scope="row">{{ index + 1 }}</th>
+          <tr  v-for="(auto) in autosFiltrados" :key="auto.id" >
+            <th scope="row">{{ auto.id }}</th>
             <td>{{ auto.marca }}</td>
             <td>{{ auto.anio }}</td>
             <td>{{ auto.color }}</td>
@@ -67,7 +66,7 @@ export default {
       autosFiltrados: [],
       precioFiltro: 0,
       condicionFiltro: false,
-      mensajeListaVacia: false
+      mensajeListaVacia: false,
     };
   },
   props: {
@@ -76,23 +75,65 @@ export default {
       default: null,
     },
   },
-  async mounted() {
-    const num = this.$route.params.numero;
-
-    if (history.state && history.state.autosGenerados && history.state.autosGenerados.numero === num) {
-      // Los datos están almacenados en el historial del navegador, no es necesario volver a cargar el backend
-      this.autos = history.state.autosGenerados.data;
-    } else {
-      // Cargar el backend normalmente
-      const result = await listaAutos(num);
-      this.autos = result;
-
-      // Almacenar los datos en el historial del navegador
-      const state = { autosGenerados: { numero: num, data: result } };
-      history.replaceState(state, '');
-    }
+  mounted() {
+    this.obtenerAutos();
+    this.obtenerFiltro();
+    
   },
   methods: {
+    async obtenerAutos() {
+      const num = this.$route.params.numero;
+      
+      if (history.state && history.state.autosGenerados && history.state.autosGenerados.numero === num) {
+        // Los datos están almacenados en el historial del navegador, no es necesario volver a cargar el backend
+        this.autos = history.state.autosGenerados.data;
+      } else {
+        localStorage.clear()
+        // Cargar el backend normalmente
+        const result = await listaAutos(num);
+        this.autos = result;
+
+        // Almacenar los datos en el historial del navegador
+        const state = { autosGenerados: { numero: num, data: result } };
+        history.replaceState(state, '');
+      }
+    },
+    obtenerFiltro() {
+      const filtroGuardado = localStorage.getItem('filtroAutos');
+
+      if (filtroGuardado) {
+        const filtro = JSON.parse(filtroGuardado);
+        this.precioFiltro = filtro.precioFiltro;
+        this.condicionFiltro = filtro.condicionFiltro;
+        this.filtro();
+      }
+    },
+    guardarFiltro() {
+      const filtro = {
+        precioFiltro: this.precioFiltro,
+        condicionFiltro: this.condicionFiltro,
+      };
+      localStorage.setItem('filtroAutos', JSON.stringify(filtro));
+      
+    },
+    async borrarFiltro() {
+      this.condicionFiltro = false;
+      this.autosFiltrados = this.autos;
+      
+      this.precioFiltro = 1
+      const resultadoFiltrado = await filtrarAutos(this.precioFiltro);
+      this.autosFiltrados = resultadoFiltrado;
+      this.guardarFiltro();
+    },
+    async filtro() {
+      if (this.precioFiltro > 0) {
+        this.condicionFiltro = true;
+        const resultadoFiltrado = await filtrarAutos(this.precioFiltro);
+        this.autosFiltrados = resultadoFiltrado;
+        
+        this.guardarFiltro();
+      }
+    },
     verDetalle(objAuto) {
       this.$router.push({
         name: "detalle",
@@ -100,25 +141,13 @@ export default {
           id: objAuto.id,
         },
         props: {
-          autos: this.autos,
+          autos: this.condicionFiltro ? this.autosFiltrados : this.autos,
         },
       });
     },
-    async filtro() {
-      if (this.precioFiltro > 0) {
-        this.condicionFiltro = true
-        const resultadoFiltrado = await filtrarAutos(this.precioFiltro)
-        this.autosFiltrados = resultadoFiltrado;
-
-      }
-    },
-    borrarFiltro() {
-      this.condicionFiltro = false
-      this.autosFiltrados = this.autos
-    }
   },
-
 };
+
 </script>
 
 <style></style>
