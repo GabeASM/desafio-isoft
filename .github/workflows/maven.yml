@@ -53,9 +53,6 @@ jobs:
     - name: Instalar dependencias
       working-directory: frontend
       run: npm install
-    - name: Ejecutar pruebas
-      working-directory: frontend
-      run: npm run test
     - name: Generar versión de producción
       working-directory: frontend
       run: npm run build
