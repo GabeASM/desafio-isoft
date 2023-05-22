@@ -10,11 +10,11 @@
       <button @click="borrarFiltro()" type="submit" class="btn btn-danger mt-3">Borrar filtro</button>
 
     </div>
-    
+
     <div>
       <h4 v-if="mensajeListaVacia === true">No hay autos con un precio menor a {{ precioFiltro }}</h4>
-      <table v-if="condicionFiltro === false" class="table table-striped">
-        <thead>
+      <table  class="table table-striped">
+      <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Marca</th>
@@ -25,8 +25,8 @@
             <th scope="col">Detalle</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(auto, index) in autos" :key="auto.id">
+        <tbody v-if="condicionFiltro === false">
+          <tr  v-for="(auto, index) in autos" :key="auto.id">
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ auto.marca }}</td>
             <td>{{ auto.anio }}</td>
@@ -38,24 +38,8 @@
             </td>
           </tr>
         </tbody>
-      </table>
-    </div>
-    <div>
-
-      <table v-if="condicionFiltro === true" class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Marca</th>
-            <th scope="col">Año</th>
-            <th scope="col">Color</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Detalle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(auto, index) in autosFiltrados" :key="auto.id">
+          <tbody v-else>
+          <tr  v-for="(auto, index) in autosFiltrados" :key="auto.id" >
             <th scope="row">{{ index + 1 }}</th>
             <td>{{ auto.marca }}</td>
             <td>{{ auto.anio }}</td>
@@ -82,8 +66,8 @@ export default {
       autos: [],
       autosFiltrados: [],
       precioFiltro: 0,
-      condicionFiltro : false,
-      mensajeListaVacia : false
+      condicionFiltro: false,
+      mensajeListaVacia: false
     };
   },
   props: {
@@ -125,10 +109,10 @@ export default {
         this.condicionFiltro = true
         const resultadoFiltrado = await filtrarAutos(this.precioFiltro)
         this.autosFiltrados = resultadoFiltrado;
-       
+
       }
     },
-    borrarFiltro(){
+    borrarFiltro() {
       this.condicionFiltro = false
       this.autosFiltrados = this.autos
     }
